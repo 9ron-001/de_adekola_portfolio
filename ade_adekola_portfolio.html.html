@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ade Adekola — Project Portfolio Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ===== DESIGN SYSTEM ===== */
+:root {
+  --ink: #0a0a0f;
+  --ink2: #111118;
+  --ink3: #1a1a24;
+  --ink4: #22222f;
+  --gold: #b8953a;
+  --gold2: #d4ac56;
+  --gold3: #f0cc80;
+  --cream: #f5f0e8;
+  --mist: rgba(245,240,232,0.75);
+  --dim: rgba(245,240,232,0.4);
+  --dimmer: rgba(245,240,232,0.2);
+  --border: rgba(184,149,58,0.18);
+  --border2: rgba(184,149,58,0.35);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+*, a { cursor: default; }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 60px;
+  background: linear-gradient(to bottom, rgba(10,10,15,0.95), transparent);
+  backdrop-filter: blur(2px);
+}
+
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold2);
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold2); }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 120px 60px 80px;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 80%, rgba(184,149,58,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 20% 20%, rgba(184,149,58,0.04) 0%, transparent 60%);
+}
+
+/* Diagonal gold rule */
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -10%;
+  width: 120%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,149,58,0.3), transparent);
+  transform: translateY(calc(100vh * 0.72)) rotate(-8deg);
+  transform-origin: left;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(184,149,58,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184,149,58,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 80%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  margin-bottom: 48px;
+  animation: slideUp 0.9s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--gold2);
+}
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4.5rem, 10vw, 9rem);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+  animation: slideUp 0.9s 0.1s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.hero-name em {
+  display: block;
+  font-style: italic;
+  color: var(--gold2);
+}
+
+.hero-title {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 64px;
+  animation: slideUp 0.9s 0.2s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 64px;
+  animation: slideUp 0.9s 0.3s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.hero-stat {
+  padding: 32px 48px;
+  border: 1px solid var(--border);
+  border-right: none;
+  position: relative;
+}
+.hero-stat:last-child { border-right: 1px solid var(--border); }
+
+.stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--gold2);
+  line-height: 1;
+  display: block;
+}
+
+.stat-lbl {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  display: block;
+  margin-top: 6px;
+}
+
+.hero-cta-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  animation: slideUp 0.9s 0.4s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 18px 40px;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-primary:hover { background: var(--gold2); transform: translateY(-2px); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--border2);
+  color: var(--gold2);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 18px 40px;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-outline:hover { border-color: var(--gold2); background: rgba(184,149,58,0.06); }
+
+.scroll-cue {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: slideUp 1s 0.6s cubic-bezier(0.16,1,0.3,1) both;
+}
+.scroll-cue span {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dimmer);
+}
+.scroll-cue-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: pulse-line 2s ease-in-out infinite;
+}
+@keyframes pulse-line {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* ===== SECTION STRUCTURE ===== */
+.section {
+  padding: 120px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 80px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 32px;
+}
+
+.section-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+.section-count {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 300;
+  color: var(--border2);
+  line-height: 1;
+  align-self: flex-end;
+}
+
+/* Full-width band sections */
+.band {
+  background: var(--ink2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ===== ABOUT ===== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 100px;
+}
+
+.about-lead {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--mist);
+  margin-bottom: 32px;
+  border-left: 2px solid var(--gold);
+  padding-left: 28px;
+}
+
+.about-body {
+  font-size: 0.95rem;
+  color: var(--dim);
+  margin-bottom: 20px;
+  line-height: 1.85;
+}
+
+.kpi-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.kpi {
+  background: var(--ink3);
+  border: 1px solid var(--border);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: border-color 0.3s, background 0.3s;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s, background 0.3s;
+}
+.kpi.visible { opacity: 1; transform: translateX(0); }
+.kpi:hover { border-color: var(--border2); background: var(--ink4); }
+
+.kpi-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+
+.kpi-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--gold2);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.kpi-text strong {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--cream);
+  margin-bottom: 2px;
+}
+.kpi-text span {
+  font-size: 0.78rem;
+  color: var(--dim);
+}
+
+/* ===== EMPLOYERS BAND ===== */
+.employers-band {
+  padding: 100px 60px;
+}
+
+.employers-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== EMPLOYER LOGO GRID ===== */
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  margin-top: 60px;
+}
+
+.logo-card {
+  background: var(--ink3);
+  padding: 36px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid transparent;
+  transition: border-color 0.35s, background 0.35s, transform 0.35s;
+  opacity: 0;
+  transform: translateY(16px);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0);
+  transition: transform 0.35s;
+}
+
+.logo-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.35s, background 0.35s;
+}
+.logo-card:hover { border-color: var(--border2); background: var(--ink4); }
+.logo-card:hover::before { transform: scaleX(1); }
+
+.logo-card .logo-wrap {
+  width: 100%;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: grayscale(1) brightness(0.75);
+  transition: filter 0.35s;
+}
+.logo-card:hover .logo-wrap { filter: grayscale(0) brightness(1); }
+
+.logo-card .logo-wrap svg {
+  max-width: 110px;
+  max-height: 44px;
+}
+
+.logo-card .logo-wrap img {
+  max-width: 100px;
+  max-height: 44px;
+  object-fit: contain;
+}
+
+.logo-org {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-align: center;
+}
+
+.logo-type {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--dimmer);
+  text-align: center;
+}
+
+/* ===== CLIENTS SECTION ===== */
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+}
+
+.client-chip {
+  background: var(--ink3);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.3s, background 0.3s;
+}
+.client-chip.visible { opacity: 1; transform: scale(1); }
+.client-chip:hover { border-color: var(--border2); background: var(--ink4); }
+
+.client-chip .client-logo {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: grayscale(1) brightness(0.7);
+  transition: filter 0.3s;
+}
+.client-chip:hover .client-logo { filter: grayscale(0) brightness(1); }
+
+.client-name {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* ===== EXPERIENCE ===== */
+.timeline {
+  position: relative;
+  padding-left: 48px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold2), transparent);
+}
+
+.tl-item {
+  margin-bottom: 64px;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.tl-item.visible { opacity: 1; transform: translateX(0); }
+
+.tl-dot {
+  position: absolute;
+  left: -52px;
+  top: 6px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--gold2);
+  box-shadow: 0 0 16px rgba(212,172,86,0.5);
+}
+
+.tl-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.tl-company {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--cream);
+}
+
+.tl-role {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  margin-top: 4px;
+}
+
+.tl-period {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--dimmer);
+  background: var(--ink3);
+  border: 1px solid var(--border);
+  padding: 6px 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tl-body {
+  font-size: 0.9rem;
+  color: var(--dim);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  color: var(--dimmer);
+  transition: all 0.3s;
+}
+.tag:hover { border-color: var(--gold); color: var(--gold2); }
+
+/* ===== SKILLS ===== */
+.skills-mosaic {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.skill-block {
+  background: var(--ink3);
+  padding: 40px;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s;
+}
+.skill-block.visible { opacity: 1; transform: translateY(0); }
+.skill-block:hover { border-color: var(--border); }
+
+.skill-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--gold2);
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  padding: 5px 12px;
+  background: rgba(184,149,58,0.07);
+  color: rgba(245,240,232,0.65);
+  border-radius: 1px;
+}
+
+/* ===== EDUCATION ===== */
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.edu-card {
+  background: var(--ink3);
+  padding: 36px 32px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s;
+}
+.edu-card.visible { opacity: 1; transform: translateY(0); }
+.edu-card:hover { border-color: var(--border2); }
+
+.edu-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: linear-gradient(to bottom, var(--gold2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.edu-card:hover::before { opacity: 1; }
+
+.edu-degree {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.edu-school {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  margin-bottom: 6px;
+}
+
+.edu-loc {
+  font-size: 0.75rem;
+  color: var(--dimmer);
+}
+
+/* ===== INDUSTRIES ===== */
+.industry-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.industry-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 11px 24px;
+  border: 1px solid var(--border);
+  color: var(--dim);
+  transition: all 0.3s;
+}
+.industry-tag:hover { border-color: var(--gold2); color: var(--gold2); background: rgba(184,149,58,0.05); }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--ink2);
+  border-top: 1px solid var(--border);
+  padding: 80px 60px;
+  text-align: center;
+}
+
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gold2);
+  margin-bottom: 8px;
+}
+
+.footer-tagline {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 48px;
+}
+
+.footer-locations {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dimmer);
+  margin-bottom: 48px;
+}
+
+.footer-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 18px 48px;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'DM Sans', sans-serif;
+  margin-bottom: 60px;
+}
+.footer-cta:hover { background: var(--gold2); transform: translateY(-2px); }
+
+.footer-micro {
+  font-size: 0.65rem;
+  color: var(--dimmer);
+  letter-spacing: 0.1em;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .logo-grid { grid-template-columns: repeat(4, 1fr); }
+  .clients-grid { grid-template-columns: repeat(4, 1fr); }
+  .about-grid { grid-template-columns: 1fr; gap: 60px; }
+  .section { padding: 80px 40px; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 20px 30px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 30px 60px; }
+  .hero-stats { flex-direction: column; gap: 2px; }
+  .hero-stat { border-right: 1px solid var(--border); }
+  .logo-grid { grid-template-columns: repeat(3, 1fr); }
+  .clients-grid { grid-template-columns: repeat(3, 1fr); }
+  .skills-mosaic, .edu-grid { grid-template-columns: 1fr; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .section { padding: 60px 30px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <div class="nav-brand">Ade Adekola</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#employers">Employers</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Professional Portfolio &nbsp;·&nbsp; 2026</div>
+    <h1 class="hero-name">Ade<em>Adekola</em></h1>
+    <p class="hero-title">Project Portfolio Manager &nbsp;·&nbsp; Scrum Master &nbsp;·&nbsp; Business Strategist</p>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-val">12+</span>
+        <span class="stat-lbl">Years Experience</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-val">100%</span>
+        <span class="stat-lbl">Delivery Rate</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-val">90%+</span>
+        <span class="stat-lbl">Client Retention</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-val">3</span>
+        <span class="stat-lbl">Countries</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-val">$50M+</span>
+        <span class="stat-lbl">Portfolio Managed</span>
+      </div>
+    </div>
+
+    <div class="hero-cta-row">
+      <a href="#contact" class="btn-primary">Available for Hire →</a>
+      <a href="#experience" class="btn-outline">View Experience</a>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-cue-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section class="section" id="about">
+  <div class="section-header">
+    <div>
+      <div class="section-label">About</div>
+      <h2 class="section-title">Delivering Results<br>Across Continents</h2>
+    </div>
+    <div class="section-count">01</div>
+  </div>
+
+  <div class="about-grid">
+    <div>
+      <p class="about-lead">"A project consultant who turns complex, multi-stakeholder programmes into consistently successful outcomes — on time, on budget, every time."</p>
+      <p class="about-body">With over 12 years of combined experience spanning Nigeria, the UK, and Canada, I bring a rare breadth of perspective to every engagement. My background covers loyalty programmes, mortgages, mobile cheque deposits, compliance, data warehousing, ERP implementations, and capital markets — always with a focus on structure, clarity, and measurable outcomes.</p>
+      <p class="about-body">I hold an MSc in International Business from Aberdeen Business School (Scotland), a BSc in Agriculture from the University of Agriculture Abeokuta, and hold certifications in IT Service Management (University of Toronto) and Canadian Securities.</p>
+    </div>
+    <div class="kpi-stack">
+      <div class="kpi">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="kpi-text"><strong>US$50M IT Portfolio Compressed</strong><span>Project value realised 2 months ahead of schedule</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div class="kpi-text"><strong>95% Resource Constraint Reduction</strong><span>Via custom resource-tracking methodology</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="kpi-text"><strong>5+ Years in Lead Associate Roles</strong><span>Leading multi-cultural, high-performing teams</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></div>
+        <div class="kpi-text"><strong>10% Schedule Overrun Prevented</strong><span>Through continuous variance analysis</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ EMPLOYERS (LOGO WALL) ═══════════ -->
+<div class="band employers-band" id="employers">
+  <div class="employers-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Direct Employers</div>
+        <h2 class="section-title">Organisations I've<br>Worked For</h2>
+      </div>
+      <div class="section-count">02</div>
+    </div>
+
+    <div class="logo-grid" id="logoGrid">
+
+      <!-- BMO Bank of Montreal -->
+      <div class="logo-card">
+        <div class="logo-wrap">
+          <svg viewBox="0 0 120 44" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="44" fill="none"/>
+            <!-- BMO Blue square -->
+            <rect x="2" y="6" width="32" height="32" rx="2" fill="#0073CF"/>
+            <text x="18" y="27" font-family="Arial Black,sans-serif" font-size="11" font-weight="900" fill="white" text-anchor="middle">BMO</text>
+            <text x="42" y="20" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#e8e8e8" text-anchor="start">Bank of</text>
+            <text x="42" y="32" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#e8e8e8" text-anchor="start">Montréal</text>
+          </svg>
+        </div>
+        <div class="logo-org">Bank of Montreal</div>
+        <div class="logo-type">Canada · 2016–2019</div>
+      </div>
+
+      <!-- TD Waterhouse -->
+      <div class="logo-card">
+        <div class="logo-wrap">
+          <svg viewBox="0 0 120 44" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="44" fill="none"/>
+            <rect x="5" y="5" width="34" height="34" rx="0" fill="#54B848"/>
+            <text x="22" y="28" font-family="Arial Black,sans-serif" font-size="16" font-weight="900" fill="white" text-anchor="middle">TD</text>
+            <text x="46" y="19" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#e8e8e8">Waterhouse</text>
+            <text x="46" y="31" font-family="Arial,sans-serif" font-size="7.5" fill="#aaa">Canada Trust</text>
+          </svg>
+        </div>
+        <div class="logo-org">TD Waterhouse</div>
+        <div class="logo-type">Canada · 2014–2015</div>
+      </div>
+
+      <!-- Vodafone -->
+      <div class="logo-card">
+        <div class="logo-wrap">
+          <svg viewBox="0 0 120 44" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="44" fill="none"/>
+            <!-- Vodafone speech-bubble mark -->
+            <circle cx="22" cy="22" r="16" fill="#E60000"/>
+            <text x="22" y="27.5" font-family="Arial Black,sans-serif" font-size="14" font-weight="900" fill="white" text-anchor="middle">V</text>
+            <text x="46" y="26" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#e8e8e8">Vodafone</text>
+          </svg>
+        </div>
+        <div class="logo-org">Vodafone UK</div>
+        <div class="logo-type">United Kingdom · 2011–2012</div>
+      </div>
+
+      <!-- Virgin Mobile -->
+      <div class="logo-card">
+        <div class="logo-wrap">
+          <svg viewBox="0 0 120 44" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="44" fill="none"/>
+            <text x="10" y="30" font-family="Brush Script MT,cursive,serif" font-size="26" font-weight="700" fill="#E10A0A" font-style="italic">Virgin</text>
+            <text x="10" y="42" font-family="Arial,sans-serif" font-size="9" fill="#888" letter-spacing="3">MOBILE</text>
+          </svg>
+        </div>
+        <div class="logo-org">Virgin Mobile</div>
+        <div class="logo-type">Canada · 2012–2014</div>
+      </div>
+
+      <!-- TekSavvy -->
+      <div class="logo-card">
+        <div class="logo-wrap">
+          <svg viewBox="0 0 120 44" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="44" fill="none"/>
+            <rect x="2" y="10" width="26" height="24" rx="3" fill="#F7941D"/>
+            <text x="15" y="27" font-family="Arial Black,sans-serif" font-size="11" font-weight="900" fill="white" text-anchor="middle">TS</text>
+            <text x="34" y="20" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#e8e8e8">TekSavvy</text>
+            <text x="34" y="32" font-family="Arial,sans-serif" font-size="7.5" fill="#888">Solutions Inc.</text>
+          </svg>
+        </div>
+        <div class="logo-org">TekSavvy</div>
+        <div class="logo-type">Canada · 2019–2021</div>
+      </div>
+
+      <!-- RPM Technologies -->
+      <div class="logo-card">
+        <div class="logo-wrap">
+          <svg viewBox="0 0 120 44" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="44" fill="none"/>
+            <polygon points="8,34 22,10 36,34" fill="none" stroke="#2196F3" stroke-width="2.5"/>
+            <text x="44" y="20" font-family="Arial Black,sans-serif" font-size="10" font-weight="900" fill="#e8e8e8">RPM</text>
+            <text x="44" y="32" font-family="Arial,sans-serif" font-size="8" fill="#888">Technologies</text>
+          </svg>
+        </div>
+        <div class="logo-org">RPM Technologies</div>
+        <div class="logo-type">Canada · 2015–2016</div>
+      </div>
+
+      <!-- Intercontinental Bank -->
+      <div class="logo-card">
+        <div class="logo-wrap">
+          <svg viewBox="0 0 120 44" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="44" fill="none"/>
+            <circle cx="18" cy="22" r="13" fill="none" stroke="#006633" stroke-width="2"/>
+            <circle cx="18" cy="22" r="7" fill="#006633"/>
+            <line x1="5" y1="22" x2="31" y2="22" stroke="#006633" stroke-width="1.5"/>
+            <line x1="18" y1="9" x2="18" y2="35" stroke="#006633" stroke-width="1.5"/>
+            <text x="37" y="19" font-family="Arial,sans-serif" font-size="7.5" font-weight="700" fill="#e8e8e8">Intercontinental</text>
+            <text x="37" y="30" font-family="Arial,sans-serif" font-size="7.5" fill="#888">Bank PLC</text>
+          </svg>
+        </div>
+        <div class="logo-org">Intercontinental Bank</div>
+        <div class="logo-type">Nigeria · 2009–2011</div>
+      </div>
+
+      <!-- Integrated Microfinance Bank -->
+      <div class="logo-card">
+        <div class="logo-wrap">
+          <svg viewBox="0 0 120 44" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="44" fill="none"/>
+            <rect x="4" y="10" width="28" height="24" rx="2" fill="#2C5F2E"/>
+            <text x="18" y="27" font-family="Arial Black,sans-serif" font-size="11" font-weight="900" fill="white" text-anchor="middle">IMFB</text>
+            <text x="38" y="19" font-family="Arial,sans-serif" font-size="7" font-weight="700" fill="#e8e8e8">Integrated</text>
+            <text x="38" y="28" font-family="Arial,sans-serif" font-size="7" fill="#aaa">Microfinance Bank</text>
+          </svg>
+        </div>
+        <div class="logo-org">IMFB</div>
+        <div class="logo-type">Nigeria · 2008–2009</div>
+      </div>
+
+      <!-- Matt O'Bell Ltd -->
+      <div class="logo-card">
+        <div class="logo-wrap">
+          <svg viewBox="0 0 120 44" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="44" fill="none"/>
+            <rect x="2" y="8" width="28" height="28" rx="0" fill="none" stroke="#b8953a" stroke-width="2"/>
+            <text x="16" y="27" font-family="Cormorant Garamond,serif" font-size="14" font-weight="700" fill="#b8953a" text-anchor="middle">M</text>
+            <text x="36" y="20" font-family="Georgia,serif" font-size="9.5" font-weight="700" fill="#e8e8e8">Matt O'Bell</text>
+            <text x="36" y="32" font-family="Arial,sans-serif" font-size="7.5" fill="#888">Limited · Lagos</text>
+          </svg>
+        </div>
+        <div class="logo-org">Matt O'Bell Ltd</div>
+        <div class="logo-type">Nigeria · 2022–Present</div>
+      </div>
+
+      <!-- ClearPay -->
+      <div class="logo-card">
+        <div class="logo-wrap">
+          <svg viewBox="0 0 120 44" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="44" fill="none"/>
+            <!-- Check mark icon -->
+            <circle cx="18" cy="22" r="13" fill="#00C853"/>
+            <polyline points="11,22 16,28 26,15" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="37" y="20" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#e8e8e8">ClearPay</text>
+            <text x="37" y="32" font-family="Arial,sans-serif" font-size="7.5" fill="#888">clearpayhub.ng</text>
+          </svg>
+        </div>
+        <div class="logo-org">ClearPay App</div>
+        <div class="logo-type">Nigeria · 2025</div>
+      </div>
+
+    </div><!-- /logo-grid -->
+  </div>
+</div>
+
+<!-- ═══════════ CLIENTS ═══════════ -->
+<section class="section" id="clients">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Client Engagements</div>
+      <h2 class="section-title">Companies I've<br>Delivered For</h2>
+    </div>
+    <div class="section-count">03</div>
+  </div>
+
+  <div class="clients-grid">
+
+    <!-- Interswitch -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="6" width="24" height="24" rx="3" fill="#FF6B00"/>
+          <text x="14" y="23" font-family="Arial Black,sans-serif" font-size="10" font-weight="900" fill="white" text-anchor="middle">IS</text>
+          <text x="32" y="22" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#e8e8e8">Interswitch</text>
+        </svg>
+      </div>
+      <div class="client-name">Interswitch</div>
+    </div>
+
+    <!-- Chams Group -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="6" width="24" height="24" rx="12" fill="#003087"/>
+          <text x="14" y="23" font-family="Arial Black,sans-serif" font-size="9" font-weight="900" fill="white" text-anchor="middle">CG</text>
+          <text x="32" y="22" font-family="Arial,sans-serif" font-size="8.5" font-weight="700" fill="#e8e8e8">Chams Group</text>
+        </svg>
+      </div>
+      <div class="client-name">Chams Group</div>
+    </div>
+
+    <!-- ipNX -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="8" width="30" height="20" rx="2" fill="#0055A5"/>
+          <text x="15" y="22.5" font-family="Arial Black,sans-serif" font-size="10" font-weight="900" fill="white" text-anchor="middle">ipNX</text>
+        </svg>
+      </div>
+      <div class="client-name">ipNX Nigeria</div>
+    </div>
+
+    <!-- Wigwe University -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="15,5 28,30 2,30" fill="none" stroke="#8B0000" stroke-width="2"/>
+          <text x="15" y="24" font-family="Times New Roman,serif" font-size="9" font-weight="700" fill="#8B0000" text-anchor="middle">WU</text>
+          <text x="35" y="22" font-family="Georgia,serif" font-size="7.5" fill="#e8e8e8">Wigwe Univ.</text>
+        </svg>
+      </div>
+      <div class="client-name">Wigwe University</div>
+    </div>
+
+    <!-- Fiber One -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4,26 Q10,6 20,16 Q30,26 36,8" fill="none" stroke="#00AEEF" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="42" y="22" font-family="Arial,sans-serif" font-size="8.5" font-weight="700" fill="#e8e8e8">Fiber One</text>
+        </svg>
+      </div>
+      <div class="client-name">Fiber One</div>
+    </div>
+
+    <!-- Lekki Gardens -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="14" width="16" height="16" rx="0" fill="#2E7D32"/>
+          <rect x="8" y="6" width="10" height="10" rx="0" fill="#388E3C"/>
+          <text x="26" y="20" font-family="Arial,sans-serif" font-size="7.5" font-weight="700" fill="#e8e8e8">Lekki</text>
+          <text x="26" y="29" font-family="Arial,sans-serif" font-size="7.5" fill="#aaa">Gardens</text>
+        </svg>
+      </div>
+      <div class="client-name">Lekki Gardens</div>
+    </div>
+
+    <!-- Pricepointe -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6,22 L14,8 L22,22 Z" fill="#FF4500" opacity="0.9"/>
+          <text x="28" y="22" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#e8e8e8">Pricepointe</text>
+        </svg>
+      </div>
+      <div class="client-name">Pricepointe</div>
+    </div>
+
+    <!-- Pack N Pay -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="12" width="20" height="14" rx="2" fill="none" stroke="#FFA000" stroke-width="2"/>
+          <path d="M8,12 L8,9 Q14,5 20,9 L20,12" fill="none" stroke="#FFA000" stroke-width="2"/>
+          <text x="30" y="22" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#e8e8e8">Pack N Pay</text>
+        </svg>
+      </div>
+      <div class="client-name">Pack N Pay</div>
+    </div>
+
+    <!-- Wellsworth Energy -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <!-- Oil drop -->
+          <path d="M14,28 Q5,28 5,20 Q5,10 14,4 Q23,10 23,20 Q23,28 14,28 Z" fill="#1565C0" opacity="0.85"/>
+          <text x="28" y="20" font-family="Arial,sans-serif" font-size="7.5" font-weight="700" fill="#e8e8e8">Wellsworth</text>
+          <text x="28" y="30" font-family="Arial,sans-serif" font-size="7.5" fill="#888">Energy</text>
+        </svg>
+      </div>
+      <div class="client-name">Wellsworth Energy</div>
+    </div>
+
+    <!-- LCCI -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="6" width="26" height="24" rx="0" fill="none" stroke="#006400" stroke-width="2"/>
+          <text x="15" y="24" font-family="Arial Black,sans-serif" font-size="10" font-weight="900" fill="#006400" text-anchor="middle">LCCI</text>
+        </svg>
+      </div>
+      <div class="client-name">LCCI</div>
+    </div>
+
+    <!-- Cruxstone -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="26" height="26" rx="1" fill="none" stroke="#607D8B" stroke-width="2"/>
+          <line x1="4" y1="17" x2="30" y2="17" stroke="#607D8B" stroke-width="1"/>
+          <line x1="17" y1="4" x2="17" y2="30" stroke="#607D8B" stroke-width="1"/>
+          <text x="36" y="22" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#e8e8e8">Cruxstone</text>
+        </svg>
+      </div>
+      <div class="client-name">Cruxstone</div>
+    </div>
+
+    <!-- Masters Energy -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="14,4 26,28 2,28" fill="#DC143C" opacity="0.9"/>
+          <text x="14" y="22" font-family="Arial Black,sans-serif" font-size="7.5" font-weight="900" fill="white" text-anchor="middle">ME</text>
+          <text x="32" y="20" font-family="Arial,sans-serif" font-size="7.5" font-weight="700" fill="#e8e8e8">Masters</text>
+          <text x="32" y="30" font-family="Arial,sans-serif" font-size="7.5" fill="#888">Energy</text>
+        </svg>
+      </div>
+      <div class="client-name">Masters Energy</div>
+    </div>
+
+    <!-- Sudabelt -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="15" cy="18" rx="12" ry="12" fill="none" stroke="#FF8C00" stroke-width="2"/>
+          <ellipse cx="15" cy="18" rx="7" ry="12" fill="none" stroke="#FF8C00" stroke-width="1.5"/>
+          <text x="32" y="22" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#e8e8e8">Sudabelt</text>
+        </svg>
+      </div>
+      <div class="client-name">Sudabelt</div>
+    </div>
+
+    <!-- Income Electrix -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14,6 L8,20 L14,20 L10,30 L22,14 L16,14 L20,6 Z" fill="#FFD700"/>
+          <text x="28" y="20" font-family="Arial,sans-serif" font-size="7.5" font-weight="700" fill="#e8e8e8">Income</text>
+          <text x="28" y="30" font-family="Arial,sans-serif" font-size="7.5" fill="#888">Electrix</text>
+        </svg>
+      </div>
+      <div class="client-name">Income Electrix</div>
+    </div>
+
+    <!-- Libra Circle -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="18" r="12" fill="none" stroke="#9C27B0" stroke-width="2"/>
+          <line x1="6" y1="24" x2="22" y2="24" stroke="#9C27B0" stroke-width="1.5"/>
+          <line x1="14" y1="24" x2="14" y2="28" stroke="#9C27B0" stroke-width="1.5"/>
+          <text x="30" y="22" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#e8e8e8">Libra Circle</text>
+        </svg>
+      </div>
+      <div class="client-name">Libra Circle</div>
+    </div>
+
+    <!-- KIRCT -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="6" width="26" height="24" rx="1" fill="#1A237E" opacity="0.9"/>
+          <text x="15" y="23" font-family="Arial Black,sans-serif" font-size="9" font-weight="900" fill="white" text-anchor="middle">KIRCT</text>
+        </svg>
+      </div>
+      <div class="client-name">KIRCT</div>
+    </div>
+
+    <!-- Clearpay App -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="18" r="12" fill="#00C853"/>
+          <polyline points="8,18 12,23 20,12" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="30" y="22" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#e8e8e8">ClearPay</text>
+        </svg>
+      </div>
+      <div class="client-name">ClearPay</div>
+    </div>
+
+    <!-- Matt O'Bell -->
+    <div class="client-chip">
+      <div class="client-logo">
+        <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="6" width="26" height="26" rx="0" fill="none" stroke="#b8953a" stroke-width="1.5"/>
+          <text x="15" y="24" font-family="Georgia,serif" font-size="13" font-weight="700" fill="#b8953a" text-anchor="middle">M</text>
+          <text x="34" y="22" font-family="Georgia,serif" font-size="8.5" font-weight="700" fill="#e8e8e8">Matt O'Bell</text>
+        </svg>
+      </div>
+      <div class="client-name">Matt O'Bell</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ EXPERIENCE ═══════════ -->
+<div class="band">
+  <section class="section" id="experience">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Work History</div>
+        <h2 class="section-title">Professional<br>Experience</h2>
+      </div>
+      <div class="section-count">04</div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <div>
+            <div class="tl-company">Matt O'Bell Ltd</div>
+            <div class="tl-role">Project Portfolio Manager</div>
+          </div>
+          <div class="tl-period">Jul 2022 – Present · Lagos, Nigeria</div>
+        </div>
+        <p class="tl-body">Acts as subject matter expert and programme owner across B2B/B2C marketing and sales initiatives. Leads end-to-end project planning from scope definition through governance documentation. Accountable for multi-stream ERP delivery across the full implementation lifecycle — from RFP and planning through go-live and post-go-live support. Holds financial oversight responsibility for all development resources across the programme portfolio and is actively partnering with internal stakeholders to identify SME industry verticals for revenue generation.</p>
+        <div class="tag-row">
+          <span class="tag">ERP Delivery</span><span class="tag">Portfolio Management</span><span class="tag">Stakeholder Management</span><span class="tag">Agile</span><span class="tag">Risk Management</span><span class="tag">Financial Oversight</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <div>
+            <div class="tl-company">ClearPay App</div>
+            <div class="tl-role">Scrum Master / Product Owner</div>
+          </div>
+          <div class="tl-period">Feb 2025 – Dec 2025 · Remote/Virtual</div>
+        </div>
+        <p class="tl-body">Drove continuous process improvement as Scrum Master — removing delivery impediments and ensuring consistent adoption of Scrum principles. Defined and documented product functionality, also acting as QA tester. Facilitated a seamless transition into the Product Owner role as the product moved from build to growth stage.</p>
+        <div class="tag-row">
+          <span class="tag">Scrum</span><span class="tag">Product Ownership</span><span class="tag">QA Testing</span><span class="tag">Fintech</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <div>
+            <div class="tl-company">TekSavvy Solutions</div>
+            <div class="tl-role">Technical Support Specialist</div>
+          </div>
+          <div class="tl-period">Sept 2019 – Jan 2021 · Chatham, Canada</div>
+        </div>
+        <p class="tl-body">Diagnosed and resolved technical issues across internet connectivity, VoIP/landline services, and digital TV. Created end-user and system manuals with the development team. Communicated changes and modifications through written documentation and verbal briefings to project teams and client stakeholders.</p>
+        <div class="tag-row">
+          <span class="tag">Technical Support</span><span class="tag">Telecommunications</span><span class="tag">Documentation</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <div>
+            <div class="tl-company">Bank of Montreal (BMO)</div>
+            <div class="tl-role">Junior Project Co-Ordinator</div>
+          </div>
+          <div class="tl-period">Aug 2016 – Mar 2019 · Toronto, Canada</div>
+        </div>
+        <p class="tl-body">Managed project timelines, budgets, and maintained costs within or below budget. Coordinated agile sprints, retrospectives, and daily stand-ups. Worked closely with architects, BAs, designers, and client representatives to define project direction. Coached team members in Agile frameworks and guided teams to higher Scrum maturity levels.</p>
+        <div class="tag-row">
+          <span class="tag">Agile / Scrum</span><span class="tag">Financial Services</span><span class="tag">Stakeholder Comms</span><span class="tag">Resource Planning</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <div>
+            <div class="tl-company">RPM Technologies</div>
+            <div class="tl-role">QA Analyst / Junior Business Analyst</div>
+          </div>
+          <div class="tl-period">Jun 2015 – Apr 2016 · Toronto, Canada</div>
+        </div>
+        <p class="tl-body">Executed software testing against SRD and test plans. Documented defect reports, maintained test logs, and performed needs/gap analysis (as-is / to-be). Defined use cases and requirements traceability matrices. Tools: RTracker, SQL Developer, JIRA, FlashFXP, Putty.</p>
+        <div class="tag-row">
+          <span class="tag">QA Testing</span><span class="tag">Business Analysis</span><span class="tag">JIRA</span><span class="tag">SQL</span><span class="tag">SDLC</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <div>
+            <div class="tl-company">TD Waterhouse Canada</div>
+            <div class="tl-role">Investment Representative — Wealth Management</div>
+          </div>
+          <div class="tl-period">Aug 2014 – Apr 2015 · Canada</div>
+        </div>
+        <p class="tl-body">Fulfilled trading instructions and serviced client accounts for equities, GICs, mutual funds, and fixed-income products. Applied fund investment/reinvestment knowledge and completed GUI tickets on OMS in line with industry regulations.</p>
+        <div class="tag-row">
+          <span class="tag">Capital Markets</span><span class="tag">Wealth Management</span><span class="tag">Equities</span><span class="tag">Compliance</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <div>
+            <div class="tl-company">Virgin Mobile Canada</div>
+            <div class="tl-role">Billing Analyst</div>
+          </div>
+          <div class="tl-period">Apr 2012 – Aug 2014 · Canada</div>
+        </div>
+        <p class="tl-body">Generated and issued invoices, prepared billing/sales reports and reconciliations. Partnered with the collections team to resolve inquiries. Coached and trained newly hired analysts. Validated invoice-impacting changes following project releases.</p>
+        <div class="tag-row">
+          <span class="tag">Billing</span><span class="tag">Telecom</span><span class="tag">Reconciliation</span><span class="tag">Training</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <div>
+            <div class="tl-company">Vodafone Home Broadband</div>
+            <div class="tl-role">Broadband Desk Analyst / Tech Expert</div>
+          </div>
+          <div class="tl-period">Feb 2011 – Mar 2012 · United Kingdom</div>
+        </div>
+        <p class="tl-body">Defined product features and functional requirements for broadband services. Assumed the Product Owner role to ensure service descriptions were delivered on time. Demonstrated deep product knowledge through detailed client troubleshooting.</p>
+        <div class="tag-row">
+          <span class="tag">Product Ownership</span><span class="tag">Broadband</span><span class="tag">Telecoms</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <div>
+            <div class="tl-company">Intercontinental Bank PLC</div>
+            <div class="tl-role">Bank Intern / Account Officer</div>
+          </div>
+          <div class="tl-period">Mar 2009 – Jan 2011 · Lagos, Nigeria</div>
+        </div>
+        <p class="tl-body">Managed and grew personal portfolio by over ₦100 million. Tailored business products to current and new customers, identified opportunities for growth, managed fixed deposits, and handled relationship management for key accounts.</p>
+        <div class="tag-row">
+          <span class="tag">Banking</span><span class="tag">Relationship Management</span><span class="tag">Fixed Deposits</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <div>
+            <div class="tl-company">Integrated Microfinance Bank</div>
+            <div class="tl-role">Business Expansion Officer</div>
+          </div>
+          <div class="tl-period">Mar 2008 – Mar 2009 · Lagos, Nigeria</div>
+        </div>
+        <p class="tl-body">Managed existing, overdue, and dormant accounts. Approved, disbursed, and recovered loans. Grew personal portfolio by ₦30 million through tailored product offerings and strong customer relationships.</p>
+        <div class="tag-row">
+          <span class="tag">Microfinance</span><span class="tag">Loans</span><span class="tag">Portfolio Growth</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════ INDUSTRIES ═══════════ -->
+<section class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Industry Exposure</div>
+      <h2 class="section-title">Sectors of<br>Expertise</h2>
+    </div>
+    <div class="section-count">05</div>
+  </div>
+  <div class="industry-wrap">
+    <div class="industry-tag">Financial Services</div>
+    <div class="industry-tag">Telecommunications</div>
+    <div class="industry-tag">Oil &amp; Gas</div>
+    <div class="industry-tag">Information Technology</div>
+    <div class="industry-tag">Healthcare</div>
+    <div class="industry-tag">Insurance</div>
+    <div class="industry-tag">Construction</div>
+    <div class="industry-tag">FMCG</div>
+    <div class="industry-tag">Retail</div>
+    <div class="industry-tag">Capital Markets</div>
+    <div class="industry-tag">Wealth Management</div>
+    <div class="industry-tag">Fintech / Payments</div>
+    <div class="industry-tag">Energy</div>
+    <div class="industry-tag">Real Estate</div>
+    <div class="industry-tag">Education</div>
+  </div>
+</section>
+
+<!-- ═══════════ SKILLS ═══════════ -->
+<div class="band">
+  <section class="section" id="skills">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Competencies</div>
+        <h2 class="section-title">Skills &amp;<br>Tooling</h2>
+      </div>
+      <div class="section-count">06</div>
+    </div>
+    <div class="skills-mosaic">
+
+      <div class="skill-block">
+        <div class="skill-title">Project Management</div>
+        <div class="skill-pills">
+          <span class="pill">PMLC</span><span class="pill">Agile</span><span class="pill">Scrum</span>
+          <span class="pill">Waterfall</span><span class="pill">Risk Management</span><span class="pill">ERP Delivery</span>
+          <span class="pill">Budget Control</span><span class="pill">Resource Planning</span>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <div class="skill-title">PPM &amp; Collaboration</div>
+        <div class="skill-pills">
+          <span class="pill">JIRA</span><span class="pill">Confluence</span><span class="pill">Clarity</span>
+          <span class="pill">Plainview</span><span class="pill">MS Project</span><span class="pill">SharePoint</span>
+          <span class="pill">Salesforce</span>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <div class="skill-title">Analysis &amp; Business</div>
+        <div class="skill-pills">
+          <span class="pill">SDLC</span><span class="pill">Financial Analysis</span><span class="pill">Gap Analysis</span>
+          <span class="pill">QA / UAT</span><span class="pill">Business Analysis</span><span class="pill">Variance Analysis</span>
+          <span class="pill">Use Case Modelling</span>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <div class="skill-title">Applications</div>
+        <div class="skill-pills">
+          <span class="pill">Odoo</span><span class="pill">MS Excel</span><span class="pill">MS Visio</span>
+          <span class="pill">SQL Developer</span><span class="pill">Remedy</span><span class="pill">AML</span>
+          <span class="pill">G-Suite</span><span class="pill">Adobe Acrobat</span>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <div class="skill-title">Leadership</div>
+        <div class="skill-pills">
+          <span class="pill">Cross-cultural Teams</span><span class="pill">Coaching &amp; Mentoring</span>
+          <span class="pill">Stakeholder Management</span><span class="pill">Strategic Thinking</span>
+          <span class="pill">Client Retention</span><span class="pill">Negotiation</span>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <div class="skill-title">Domain Knowledge</div>
+        <div class="skill-pills">
+          <span class="pill">ERP Systems</span><span class="pill">Loyalty Programmes</span>
+          <span class="pill">Mobile Cheque Deposit</span><span class="pill">Capital Markets</span>
+          <span class="pill">Billing &amp; Invoicing</span><span class="pill">Data Warehousing</span>
+          <span class="pill">Compliance</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════ EDUCATION ═══════════ -->
+<section class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Education &amp; Credentials</div>
+      <h2 class="section-title">Qualifications</h2>
+    </div>
+    <div class="section-count">07</div>
+  </div>
+
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">MSc International Business</div>
+      <div class="edu-school">Aberdeen Business School</div>
+      <div class="edu-loc">Scotland, United Kingdom</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">B.Sc Agriculture (Genetics Option)</div>
+      <div class="edu-school">University of Agriculture, Abeokuta</div>
+      <div class="edu-loc">Nigeria</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Certificate in IT Service Management (ITSM)</div>
+      <div class="edu-school">University of Toronto</div>
+      <div class="edu-loc">Canada</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Canadian Securities Course (CSC 1 &amp; 2)</div>
+      <div class="edu-school">Canadian Securities Institute</div>
+      <div class="edu-loc">Canada</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Conduct &amp; Practices Handbook (CPH)</div>
+      <div class="edu-school">Canadian Securities Institute</div>
+      <div class="edu-loc">Canada</div>
+    </div>
+    <div class="edu-card" style="border-color: var(--border);">
+      <div class="edu-degree" style="color: var(--gold2);">Professional Scrum Master (PSM I)</div>
+      <div class="edu-school">Scrum.org</div>
+      <div class="edu-loc" style="color: var(--gold); font-size:0.7rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase;">In Progress</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer id="contact">
+  <div class="footer-name">Ade Adekola</div>
+  <p class="footer-tagline">Project Portfolio Manager &nbsp;·&nbsp; Available for New Opportunities</p>
+  <div class="footer-locations">
+    <span>📍 Lagos, Nigeria</span>
+    <span>🌍 Open to UK &amp; Canada</span>
+    <span>🌐 Remote-Ready</span>
+  </div>
+  <a href="mailto:ade.adekola@email.com" class="footer-cta">Get In Touch →</a>
+  <div class="footer-micro">© 2026 Ade Adekola · All Rights Reserved</div>
+</footer>
+
+<script>
+// Intersection Observer — reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+// Stagger logo cards
+document.querySelectorAll('.logo-card').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.06) + 's';
+  observer.observe(el);
+});
+
+// Stagger client chips
+document.querySelectorAll('.client-chip').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.04) + 's';
+  observer.observe(el);
+});
+
+// Timeline items
+document.querySelectorAll('.tl-item').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.07) + 's';
+  observer.observe(el);
+});
+
+// KPI cards
+document.querySelectorAll('.kpi').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.1) + 's';
+  observer.observe(el);
+});
+
+// Skill blocks
+document.querySelectorAll('.skill-block').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.07) + 's';
+  observer.observe(el);
+});
+
+// Edu cards
+document.querySelectorAll('.edu-card').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.08) + 's';
+  observer.observe(el);
+});
+
+// Smooth active nav highlighting
+const sections = document.querySelectorAll('section[id], div[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 200) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.style.color = link.getAttribute('href') === '#' + current
+      ? 'var(--gold2)'
+      : '';
+  });
+});
+</script>
+
+</body>
+</html>
